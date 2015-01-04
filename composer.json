@@ -1,0 +1,34 @@
+{
+    "name": "brera/lib-key-value-store",
+    "description": "Brera KeyValueStore Library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Vinai Kopp",
+            "email": "vinai@brera.io"
+        },
+        {
+            "name": "Tim Bezhashvyly",
+            "email": "tim@brera.io"
+        },
+        {
+            "name": "Fabian Blechsmidt",
+            "email": "fabian@brera.io"
+        }
+    ],
+    "require": {
+        "brera/lib-key-value-store-interface": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload" : {
+        "psr-4": { "Brera\\Lib\\KeyValue\\": "src/" }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:brera/lib-key-value-store-interface.git"
+        }
+    ]
+}
