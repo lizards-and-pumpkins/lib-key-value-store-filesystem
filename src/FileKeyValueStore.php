@@ -1,10 +1,10 @@
 <?php
 
-namespace Brera\PoC\KeyValue\File;
+namespace Brera\KeyValue\File;
 
-use Brera\PoC\KeyValue\KeyValueStore;
-use Brera\PoC\KeyValue\KeyNotFoundException;
-use Brera\PoC\KeyValue\KeyValueStoreNotAvailableException;
+use Brera\KeyValue\KeyValueStore;
+use Brera\KeyValue\KeyNotFoundException;
+use Brera\KeyValue\KeyValueStoreNotAvailableException;
 
 class FileKeyValueStore implements KeyValueStore
 {
