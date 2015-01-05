@@ -1,6 +1,6 @@
 <?php
 
-namespace Brera\Lib\KeyValue;
+namespace Brera\PoC\KeyValue;
 
 class InMemoryKeyValueStore implements KeyValueStore
 {

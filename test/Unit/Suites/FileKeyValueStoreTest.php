@@ -1,9 +1,9 @@
 <?php
 
-namespace Brera\Lib\KeyValue;
+namespace Brera\PoC\KeyValue;
 
 /**
- * @covers  \Brera\Lib\KeyValue\FileKeyValueStore
+ * @covers  \Brera\PoC\KeyValue\FileKeyValueStore
  */
 class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @test
-	 * @expectedException \Brera\Lib\KeyValue\KeyValueStoreNotAvailableException
+	 * @expectedException \Brera\PoC\KeyValue\KeyValueStoreNotAvailableException
 	 */
 	public function itShouldThrowAnExceptionIfStorageDirIsNotWritable()
 	{
@@ -42,7 +42,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @test
-	 * @expectedException \Brera\Lib\KeyValue\KeyNotFoundException
+	 * @expectedException \Brera\PoC\KeyValue\KeyNotFoundException
 	 */
 	public function itShouldThrowAnExceptionWhenValueIsNotSet()
 	{

@@ -17,18 +17,25 @@
         }
     ],
     "require": {
-        "brera/lib-key-value-store-interface": "dev-master"
+        "brera/proof-of-concept": "dev-discussion-import"
     },
     "require-dev": {
         "phpunit/phpunit": "4.*"
     },
     "autoload" : {
-        "psr-4": { "Brera\\Lib\\KeyValue\\": "src/" }
+        "psr-4": { "Brera\\PoC\\KeyValue\\": "src/" }
     },
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:brera/lib-key-value-store-interface.git"
+            "url": "git@github.com:brera/proof-of-concept.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:brera/lib-queue.git"
         }
-    ]
+
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
