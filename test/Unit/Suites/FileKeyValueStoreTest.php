@@ -1,9 +1,9 @@
 <?php
 
-namespace Brera\PoC\KeyValue;
+namespace Brera\PoC\KeyValue\File;
 
 /**
- * @covers  \Brera\PoC\KeyValue\FileKeyValueStore
+ * @covers  \Brera\PoC\KeyValue\File\FileKeyValueStore
  */
 class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {

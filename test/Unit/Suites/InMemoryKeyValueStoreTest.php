@@ -1,9 +1,9 @@
 <?php
 
-namespace Brera\PoC\KeyValue;
+namespace Brera\PoC\KeyValue\InMemory;
 
 /**
- * @covers  \Brera\Lib\KeyValue\InMemoryKeyValueStore
+ * @covers  \Brera\Lib\KeyValue\File\InMemoryKeyValueStore
  */
 class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {

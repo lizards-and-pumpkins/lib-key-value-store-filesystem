@@ -1,6 +1,9 @@
 <?php
 
-namespace Brera\PoC\KeyValue;
+namespace Brera\PoC\KeyValue\InMemory;
+
+use Brera\PoC\KeyValue\KeyValueStore;
+use Brera\PoC\KeyValue\KeyNotFoundException;
 
 class InMemoryKeyValueStore implements KeyValueStore
 {

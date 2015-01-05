@@ -23,7 +23,10 @@
         "phpunit/phpunit": "4.*"
     },
     "autoload" : {
-        "psr-4": { "Brera\\PoC\\KeyValue\\": "src/" }
+        "psr-4": {
+            "Brera\\PoC\\KeyValue\\InMemory\\": "src/",
+            "Brera\\PoC\\KeyValue\\File\\": "src/"
+        }
     },
     "repositories": [
         {
