@@ -30,14 +30,9 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "git@github.com:brera/proof-of-concept.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:brera/lib-queue.git"
+            "type": "composer",
+            "url": "http://packages.brera.io"
         }
-
     ],
     "minimum-stability": "dev",
     "prefer-stable": true
