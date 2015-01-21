@@ -54,7 +54,7 @@ class InMemoryKeyValueStore implements KeyValueStore
 
 		foreach ($keys as $key) {
 			if (array_key_exists($key, $this->store)) {
-				$foundValues[] = $this->store[$key];
+				$foundValues[$key] = $this->store[$key];
 			}
 		}
 
