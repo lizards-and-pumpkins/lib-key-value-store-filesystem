@@ -74,7 +74,7 @@ class FileKeyValueStore implements KeyValueStore
 
 		foreach ($keys as $key) {
 			if ($this->has($key)) {
-				$items[] = $this->get($key);
+				$items[$key] = $this->get($key);
 			}
 		}
 

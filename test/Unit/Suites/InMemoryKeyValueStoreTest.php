@@ -64,6 +64,6 @@ class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 		$this->store->multiSet($items);
 		$result = $this->store->multiGet($keys);
 
-		$this->assertSame($values, $result);
+		$this->assertSame($items, $result);
 	}
 }
