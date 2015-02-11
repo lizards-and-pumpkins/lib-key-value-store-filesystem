@@ -52,18 +52,18 @@ class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->store->get('not set key');
     }
 
-	/**
-	 * @test
-	 */
-	public function itShouldSetAndGetMultipleKeys()
-	{
-		$keys = ['key1', 'key2'];
-		$values = ['foo', 'bar'];
-		$items = array_combine($keys, $values);
+    /**
+     * @test
+     */
+    public function itShouldSetAndGetMultipleKeys()
+    {
+        $keys = ['key1', 'key2'];
+        $values = ['foo', 'bar'];
+        $items = array_combine($keys, $values);
 
-		$this->store->multiSet($items);
-		$result = $this->store->multiGet($keys);
+        $this->store->multiSet($items);
+        $result = $this->store->multiGet($keys);
 
-		$this->assertSame($items, $result);
-	}
+        $this->assertSame($items, $result);
+    }
 }
