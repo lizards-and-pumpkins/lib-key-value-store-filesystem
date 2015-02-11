@@ -44,29 +44,29 @@ class InMemoryKeyValueStore implements KeyValueStore
         return array_key_exists($key, $this->store);
     }
 
-	/**
-	 * @param array $keys
-	 * @return array
-	 */
-	public function multiGet(array $keys)
-	{
-		$foundValues = [];
+    /**
+     * @param array $keys
+     * @return array
+     */
+    public function multiGet(array $keys)
+    {
+        $foundValues = [];
 
-		foreach ($keys as $key) {
-			if (array_key_exists($key, $this->store)) {
-				$foundValues[$key] = $this->store[$key];
-			}
-		}
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $this->store)) {
+                $foundValues[$key] = $this->store[$key];
+            }
+        }
 
-		return $foundValues;
-	}
+        return $foundValues;
+    }
 
-	/**
-	 * @param array $items
-	 * @return null
-	 */
-	public function multiSet(array $items)
-	{
-		$this->store = array_merge($this->store, $items);
-	}
-} 
+    /**
+     * @param array $items
+     * @return null
+     */
+    public function multiSet(array $items)
+    {
+        $this->store = array_merge($this->store, $items);
+    }
+}

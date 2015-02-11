@@ -7,75 +7,75 @@ namespace Brera\KeyValue\File;
  */
 class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var FileKeyValueStore
-	 */
-	private $store;
+    /**
+     * @var FileKeyValueStore
+     */
+    private $store;
 
-	protected function setUp()
-	{
-		array_map('unlink', glob(sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'key_*'));
+    protected function setUp()
+    {
+        array_map('unlink', glob(sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'key_*'));
 
-		$this->store = new FileKeyValueStore();
-	}
+        $this->store = new FileKeyValueStore();
+    }
 
-	/**
-	 * @test
-	 * @expectedException \Brera\KeyValue\KeyValueStoreNotAvailableException
-	 */
-	public function itShouldThrowAnExceptionIfStorageDirIsNotWritable()
-	{
-		new FileKeyValueStore('foo');
-	}
+    /**
+     * @test
+     * @expectedException \Brera\KeyValue\KeyValueStoreNotAvailableException
+     */
+    public function itShouldThrowAnExceptionIfStorageDirIsNotWritable()
+    {
+        new FileKeyValueStore('foo');
+    }
 
-	/**
-	 * @test
-	 */
-	public function itShouldSetAndGetAValue()
-	{
-		$key = 'key';
-		$value = 'value';
+    /**
+     * @test
+     */
+    public function itShouldSetAndGetAValue()
+    {
+        $key = 'key';
+        $value = 'value';
 
-		$this->store->set($key, $value);
-		$this->assertEquals($value, $this->store->get($key));
-	}
+        $this->store->set($key, $value);
+        $this->assertEquals($value, $this->store->get($key));
+    }
 
-	/**
-	 * @test
-	 * @expectedException \Brera\KeyValue\KeyNotFoundException
-	 */
-	public function itShouldThrowAnExceptionWhenValueIsNotSet()
-	{
-		$this->store->get('not set key');
-	}
+    /**
+     * @test
+     * @expectedException \Brera\KeyValue\KeyNotFoundException
+     */
+    public function itShouldThrowAnExceptionWhenValueIsNotSet()
+    {
+        $this->store->get('not set key');
+    }
 
-	/**
-	 * @test
-	 */
-	public function itShouldReturnTrueOnlyAfterValueIsSet()
-	{
-		$key = 'key';
-		$value = 'value';
+    /**
+     * @test
+     */
+    public function itShouldReturnTrueOnlyAfterValueIsSet()
+    {
+        $key = 'key';
+        $value = 'value';
 
-		$this->assertFalse($this->store->has($key));
+        $this->assertFalse($this->store->has($key));
 
-		$this->store->set($key, $value);
-		$this->assertTrue($this->store->has($key));
-	}
+        $this->store->set($key, $value);
+        $this->assertTrue($this->store->has($key));
+    }
 
 
-	/**
-	 * @test
-	 */
-	public function itShouldSetAndGetMultipleKeys()
-	{
-		$keys = ['key1', 'key2'];
-		$values = ['foo', 'bar'];
-		$items = array_combine($keys, $values);
+    /**
+     * @test
+     */
+    public function itShouldSetAndGetMultipleKeys()
+    {
+        $keys = ['key1', 'key2'];
+        $values = ['foo', 'bar'];
+        $items = array_combine($keys, $values);
 
-		$this->store->multiSet($items);
-		$result = $this->store->multiGet($keys);
+        $this->store->multiSet($items);
+        $result = $this->store->multiGet($keys);
 
-		$this->assertSame($items, $result);
-	}
+        $this->assertSame($items, $result);
+    }
 }
