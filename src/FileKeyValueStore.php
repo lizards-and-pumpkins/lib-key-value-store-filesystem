@@ -25,7 +25,10 @@ class FileKeyValueStore implements KeyValueStore
         }
 
         if (!is_writable($storagePath)) {
-            throw new KeyValueStoreNotAvailableException();
+            throw new KeyValueStoreNotAvailableException(sprintf(
+                'Directory "%s" is not writable by the filesystem key-value storage',
+                $storagePath
+            ));
         }
 
         $this->storagePath = $storagePath;
