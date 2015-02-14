@@ -24,8 +24,8 @@
     },
     "autoload" : {
         "psr-4": {
-            "Brera\\KeyValue\\InMemory\\": "src/",
-            "Brera\\KeyValue\\File\\": "src/"
+            "Brera\\DataPool\\KeyValue\\InMemory\\": "src/",
+            "Brera\\DataPool\\KeyValue\\File\\": "src/"
         }
     },
     "repositories": [

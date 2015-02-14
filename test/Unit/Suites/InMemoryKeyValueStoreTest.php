@@ -1,9 +1,9 @@
 <?php
 
-namespace Brera\KeyValue\InMemory;
+namespace Brera\DataPool\KeyValue\InMemory;
 
 /**
- * @covers  \Brera\KeyValue\File\InMemoryKeyValueStore
+ * @covers  \Brera\DataPool\KeyValue\File\InMemoryKeyValueStore
  */
 class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,7 +45,7 @@ class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Brera\KeyValue\KeyNotFoundException
+     * @expectedException \Brera\DataPool\KeyValue\KeyNotFoundException
      */
     public function itShouldThrowAnExceptionWhenValueIsNotSet()
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Brera\KeyValue\File;
+namespace Brera\DataPool\KeyValue\File;
 
-use Brera\KeyValue\KeyValueStore;
-use Brera\KeyValue\KeyNotFoundException;
-use Brera\KeyValue\KeyValueStoreNotAvailableException;
+use Brera\DataPool\KeyValue\KeyValueStore;
+use Brera\DataPool\KeyValue\KeyNotFoundException;
+use Brera\DataPool\KeyValue\KeyValueStoreNotAvailableException;
 
 class FileKeyValueStore implements KeyValueStore
 {
@@ -45,6 +45,7 @@ class FileKeyValueStore implements KeyValueStore
     /**
      * @param string $key
      * @return mixed
+     * @throws KeyNotFoundException
      */
     public function get($key)
     {

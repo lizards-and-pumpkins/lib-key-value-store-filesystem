@@ -1,9 +1,9 @@
 <?php
 
-namespace Brera\KeyValue\InMemory;
+namespace Brera\DataPool\KeyValue\InMemory;
 
-use Brera\KeyValue\KeyValueStore;
-use Brera\KeyValue\KeyNotFoundException;
+use Brera\DataPool\KeyValue\KeyValueStore;
+use Brera\DataPool\KeyValue\KeyNotFoundException;
 
 class InMemoryKeyValueStore implements KeyValueStore
 {

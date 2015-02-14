@@ -1,9 +1,9 @@
 <?php
 
-namespace Brera\KeyValue\File;
+namespace Brera\DataPool\KeyValue\File;
 
 /**
- * @covers  \Brera\KeyValue\File\FileKeyValueStore
+ * @covers  \Brera\DataPool\KeyValue\File\FileKeyValueStore
  */
 class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Brera\KeyValue\KeyValueStoreNotAvailableException
+     * @expectedException \Brera\DataPool\KeyValue\KeyValueStoreNotAvailableException
      */
     public function itShouldThrowAnExceptionIfStorageDirIsNotWritable()
     {
@@ -42,7 +42,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Brera\KeyValue\KeyNotFoundException
+     * @expectedException \Brera\DataPool\KeyValue\KeyNotFoundException
      */
     public function itShouldThrowAnExceptionWhenValueIsNotSet()
     {
