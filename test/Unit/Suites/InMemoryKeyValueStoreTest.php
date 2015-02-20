@@ -3,7 +3,7 @@
 namespace Brera\DataPool\KeyValue\InMemory;
 
 /**
- * @covers  \Brera\DataPool\KeyValue\File\InMemoryKeyValueStore
+ * @covers  \Brera\DataPool\KeyValue\InMemory\InMemoryKeyValueStore
  */
 class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
