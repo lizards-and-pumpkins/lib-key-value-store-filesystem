@@ -20,7 +20,8 @@
         "brera/proof-of-concept": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "4.*",
+        "brera/coding-standards": "dev-master"
     },
     "autoload" : {
         "psr-4": {
@@ -34,6 +35,9 @@
             "url": "http://packages.brera.io"
         }
     ],
+    "scripts" : {
+        "sniff" : "vendor/bin/phpcs -p --colors --standard=vendor/brera/coding-standards/src/Brera/ src/ tests/"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
