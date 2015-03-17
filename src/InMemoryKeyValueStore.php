@@ -45,8 +45,8 @@ class InMemoryKeyValueStore implements KeyValueStore
     }
 
     /**
-     * @param array $keys
-     * @return array
+     * @param string[] $keys
+     * @return mixed[]
      */
     public function multiGet(array $keys)
     {
