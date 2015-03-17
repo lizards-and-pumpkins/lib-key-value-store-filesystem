@@ -18,6 +18,10 @@ class FileKeyValueStore implements KeyValueStore
      */
     private $keyPrefix;
 
+    /**
+     * @param string $storagePath
+     * @param string $keyFilePrefix
+     */
     public function __construct($storagePath = null, $keyFilePrefix = 'key_')
     {
         if (is_null($storagePath)) {
@@ -69,8 +73,8 @@ class FileKeyValueStore implements KeyValueStore
     }
 
     /**
-     * @param array $keys
-     * @return array
+     * @param string[] $keys
+     * @return mixed[]
      */
     public function multiGet(array $keys)
     {
