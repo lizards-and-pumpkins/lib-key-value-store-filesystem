@@ -14,20 +14,10 @@ class FileKeyValueStore implements KeyValueStore
     private $storagePath;
 
     /**
-     * @var string
-     */
-    private $keyPrefix;
-
-    /**
      * @param string $storagePath
-     * @param string $keyFilePrefix
      */
-    public function __construct($storagePath = null, $keyFilePrefix = 'key_')
+    public function __construct($storagePath)
     {
-        if (is_null($storagePath)) {
-            $storagePath = sys_get_temp_dir();
-        }
-
         if (!is_writable($storagePath)) {
             throw new KeyValueStoreNotAvailableException(sprintf(
                 'Directory "%s" is not writable by the filesystem key-value storage',
@@ -36,7 +26,6 @@ class FileKeyValueStore implements KeyValueStore
         }
 
         $this->storagePath = $storagePath;
-        $this->keyPrefix = $keyFilePrefix;
     }
 
     /**
@@ -106,6 +95,6 @@ class FileKeyValueStore implements KeyValueStore
      */
     private function getFilePathByKey($key)
     {
-        return $this->storagePath . DIRECTORY_SEPARATOR . $this->keyPrefix . $key;
+        return $this->storagePath . '/' . $key;
     }
 }

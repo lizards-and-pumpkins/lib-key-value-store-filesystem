@@ -12,11 +12,24 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
      */
     private $store;
 
+    /**
+     * @var string
+     */
+    private $storageDir;
+
     protected function setUp()
     {
-        array_map('unlink', glob(sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'key_*'));
+        $this->storageDir = sys_get_temp_dir() . '/brera-lib-key-value-store';
 
-        $this->store = new FileKeyValueStore();
+        mkdir($this->storageDir);
+
+        $this->store = new FileKeyValueStore($this->storageDir);
+    }
+
+    protected function tearDown()
+    {
+        array_map('unlink', glob($this->storageDir . '/*'));
+        rmdir($this->storageDir);
     }
 
     /**
