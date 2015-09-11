@@ -2,6 +2,8 @@
 
 namespace Brera\DataPool\KeyValue\File;
 
+use Brera\Utils\Clearable;
+
 /**
  * @covers  \Brera\DataPool\KeyValue\File\FileKeyValueStore
  */
@@ -32,19 +34,13 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         rmdir($this->storageDir);
     }
 
-    /**
-     * @test
-     * @expectedException \Brera\DataPool\KeyValue\KeyValueStoreNotAvailableException
-     */
-    public function itShouldThrowAnExceptionIfStorageDirIsNotWritable()
+    public function testItThrowsAnExceptionIfStorageDirIsNotWritable()
     {
+        $this->setExpectedException(\Brera\DataPool\KeyValue\KeyValueStoreNotAvailableException::class);
         new FileKeyValueStore('foo');
     }
 
-    /**
-     * @test
-     */
-    public function itShouldSetAndGetAValue()
+    public function testItSetsAndGetsAValue()
     {
         $key = 'key';
         $value = 'value';
@@ -53,19 +49,13 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $this->store->get($key));
     }
 
-    /**
-     * @test
-     * @expectedException \Brera\DataPool\KeyValue\KeyNotFoundException
-     */
-    public function itShouldThrowAnExceptionWhenValueIsNotSet()
+    public function testItThrowsAnExceptionWhenValueIsNotSet()
     {
+        $this->setExpectedException(\Brera\DataPool\KeyValue\KeyNotFoundException::class);
         $this->store->get('not set key');
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnTrueOnlyAfterValueIsSet()
+    public function testItReturnsTrueOnlyAfterValueIsSet()
     {
         $key = 'key';
         $value = 'value';
@@ -75,12 +65,8 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->store->set($key, $value);
         $this->assertTrue($this->store->has($key));
     }
-
-
-    /**
-     * @test
-     */
-    public function itShouldSetAndGetMultipleKeys()
+    
+    public function testItSetsAndGetsMultipleKeys()
     {
         $keys = ['key1', 'key2'];
         $values = ['foo', 'bar'];
@@ -90,5 +76,20 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $result = $this->store->multiGet($keys);
 
         $this->assertSame($items, $result);
+    }
+
+    public function testItImplementsTheClearableInterface()
+    {
+        $this->assertInstanceOf(Clearable::class, $this->store);
+    }
+
+    public function testItFlushesTheContents()
+    {
+        $key = 'key';
+        $value = 'value';
+        
+        $this->store->set($key, $value);
+        $this->store->clear();
+        $this->assertFalse($this->store->has($key));
     }
 }

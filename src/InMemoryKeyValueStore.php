@@ -4,8 +4,9 @@ namespace Brera\DataPool\KeyValue\InMemory;
 
 use Brera\DataPool\KeyValue\KeyValueStore;
 use Brera\DataPool\KeyValue\KeyNotFoundException;
+use Brera\Utils\Clearable;
 
-class InMemoryKeyValueStore implements KeyValueStore
+class InMemoryKeyValueStore implements KeyValueStore, Clearable
 {
     /**
      * @var array
@@ -15,7 +16,6 @@ class InMemoryKeyValueStore implements KeyValueStore
     /**
      * @param string $key
      * @return mixed
-     * @throws KeyNotFoundException
      */
     public function get($key)
     {
@@ -28,7 +28,7 @@ class InMemoryKeyValueStore implements KeyValueStore
     /**
      * @param string $key
      * @param mixed $value
-     * @return null
+     * @return void
      */
     public function set($key, $value)
     {
@@ -36,7 +36,7 @@ class InMemoryKeyValueStore implements KeyValueStore
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function has($key)
@@ -62,11 +62,16 @@ class InMemoryKeyValueStore implements KeyValueStore
     }
 
     /**
-     * @param array $items
+     * @param mixed[] $items
      * @return null
      */
     public function multiSet(array $items)
     {
         $this->store = array_merge($this->store, $items);
+    }
+
+    public function clear()
+    {
+        $this->store = [];
     }
 }
