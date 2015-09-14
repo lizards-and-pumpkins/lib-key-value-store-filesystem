@@ -3,6 +3,7 @@
 namespace LizardsAndPumpkins\DataPool\KeyValue\InMemory;
 
 use LizardsAndPumpkins\DataPool\KeyValue\KeyNotFoundException;
+use LizardsAndPumpkins\Utils\Clearable;
 
 /**
  * @covers \LizardsAndPumpkins\DataPool\KeyValue\InMemory\InMemoryKeyValueStore
@@ -55,5 +56,20 @@ class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $result = $this->store->multiGet($keys);
 
         $this->assertSame($items, $result);
+    }
+
+    public function testClearableInterfaceIsImplemented()
+    {
+        $this->assertInstanceOf(Clearable::class, $this->store);
+    }
+
+    public function testStorageContentIsFlushed()
+    {
+        $key = 'key';
+        $value = 'value';
+
+        $this->store->set($key, $value);
+        $this->store->clear();
+        $this->assertFalse($this->store->has($key));
     }
 }

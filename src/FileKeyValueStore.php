@@ -5,8 +5,10 @@ namespace LizardsAndPumpkins\DataPool\KeyValue\File;
 use LizardsAndPumpkins\DataPool\KeyValue\KeyValueStore;
 use LizardsAndPumpkins\DataPool\KeyValue\KeyNotFoundException;
 use LizardsAndPumpkins\DataPool\KeyValue\KeyValueStoreNotAvailableException;
+use LizardsAndPumpkins\Utils\Clearable;
+use LizardsAndPumpkins\Utils\LocalFilesystem;
 
-class FileKeyValueStore implements KeyValueStore
+class FileKeyValueStore implements KeyValueStore, Clearable
 {
     /**
      * @var string
@@ -31,7 +33,7 @@ class FileKeyValueStore implements KeyValueStore
     /**
      * @param string $key
      * @param mixed $value
-     * @return null
+     * @return void
      */
     public function set($key, $value)
     {
@@ -41,7 +43,6 @@ class FileKeyValueStore implements KeyValueStore
     /**
      * @param string $key
      * @return mixed
-     * @throws KeyNotFoundException
      */
     public function get($key)
     {
@@ -79,7 +80,7 @@ class FileKeyValueStore implements KeyValueStore
     }
 
     /**
-     * @param array $items
+     * @param string[] $items
      * @return null
      */
     public function multiSet(array $items)
@@ -96,5 +97,10 @@ class FileKeyValueStore implements KeyValueStore
     private function getFilePathByKey($key)
     {
         return $this->storagePath . '/' . $key;
+    }
+
+    public function clear()
+    {
+        (new LocalFilesystem)->removeDirectoryContents($this->storagePath);
     }
 }
