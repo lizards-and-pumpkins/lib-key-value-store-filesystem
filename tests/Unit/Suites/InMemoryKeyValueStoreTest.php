@@ -1,9 +1,11 @@
 <?php
 
-namespace Brera\DataPool\KeyValue\InMemory;
+namespace LizardsAndPumpkins\DataPool\KeyValue\InMemory;
+
+use LizardsAndPumpkins\DataPool\KeyValue\KeyNotFoundException;
 
 /**
- * @covers  \Brera\DataPool\KeyValue\InMemory\InMemoryKeyValueStore
+ * @covers \LizardsAndPumpkins\DataPool\KeyValue\InMemory\InMemoryKeyValueStore
  */
 class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,13 +16,10 @@ class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->store = new InMemoryKeyValueStore();
+        $this->store = new InMemoryKeyValueStore;
     }
 
-    /**
-     * @test
-     */
-    public function itShouldSetAndGetAValue()
+    public function testValueIsSetAndRetrieved()
     {
         $key = 'key';
         $value = 'value';
@@ -29,10 +28,7 @@ class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $this->store->get($key));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnTrueOnlyAfterValueIsSet()
+    public function testTrueIsReturnedOnlyAfterValueIsSet()
     {
         $key = 'key';
         $value = 'value';
@@ -43,19 +39,13 @@ class InMemoryKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->store->has($key));
     }
 
-    /**
-     * @test
-     * @expectedException \Brera\DataPool\KeyValue\KeyNotFoundException
-     */
-    public function itShouldThrowAnExceptionWhenValueIsNotSet()
+    public function testExceptionIsThrownIfValueIsNotSet()
     {
+        $this->setExpectedException(KeyNotFoundException::class);
         $this->store->get('not set key');
     }
 
-    /**
-     * @test
-     */
-    public function itShouldSetAndGetMultipleKeys()
+    public function testMultipleKeysAreSetAndRetrieved()
     {
         $keys = ['key1', 'key2'];
         $values = ['foo', 'bar'];

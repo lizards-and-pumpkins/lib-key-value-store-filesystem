@@ -1,9 +1,12 @@
 <?php
 
-namespace Brera\DataPool\KeyValue\File;
+namespace LizardsAndPumpkins\DataPool\KeyValue\File;
+
+use LizardsAndPumpkins\DataPool\KeyValue\KeyNotFoundException;
+use LizardsAndPumpkins\DataPool\KeyValue\KeyValueStoreNotAvailableException;
 
 /**
- * @covers  \Brera\DataPool\KeyValue\File\FileKeyValueStore
+ * @covers \LizardsAndPumpkins\DataPool\KeyValue\File\FileKeyValueStore
  */
 class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,7 +22,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->storageDir = sys_get_temp_dir() . '/brera-lib-key-value-store';
+        $this->storageDir = sys_get_temp_dir() . '/lizards-and-pumpkins-lib-key-value-store';
 
         mkdir($this->storageDir);
 
@@ -32,19 +35,13 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         rmdir($this->storageDir);
     }
 
-    /**
-     * @test
-     * @expectedException \Brera\DataPool\KeyValue\KeyValueStoreNotAvailableException
-     */
-    public function itShouldThrowAnExceptionIfStorageDirIsNotWritable()
+    public function testExceptionIsThrownIfStorageDirIsNotWritable()
     {
+        $this->setExpectedException(KeyValueStoreNotAvailableException::class);
         new FileKeyValueStore('foo');
     }
 
-    /**
-     * @test
-     */
-    public function itShouldSetAndGetAValue()
+    public function testValueIsSetAndRetrieved()
     {
         $key = 'key';
         $value = 'value';
@@ -53,19 +50,13 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $this->store->get($key));
     }
 
-    /**
-     * @test
-     * @expectedException \Brera\DataPool\KeyValue\KeyNotFoundException
-     */
-    public function itShouldThrowAnExceptionWhenValueIsNotSet()
+    public function testExceptionIsThrownIfValueIsNotSet()
     {
+        $this->setExpectedException(KeyNotFoundException::class);
         $this->store->get('not set key');
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnTrueOnlyAfterValueIsSet()
+    public function testTrueIsReturnedOnlyAfterValueIsSet()
     {
         $key = 'key';
         $value = 'value';
@@ -76,11 +67,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->store->has($key));
     }
 
-
-    /**
-     * @test
-     */
-    public function itShouldSetAndGetMultipleKeys()
+    public function testMultipleKeysAreSetAndRetrieved()
     {
         $keys = ['key1', 'key2'];
         $values = ['foo', 'bar'];

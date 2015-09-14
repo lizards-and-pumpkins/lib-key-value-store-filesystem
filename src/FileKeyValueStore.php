@@ -1,10 +1,10 @@
 <?php
 
-namespace Brera\DataPool\KeyValue\File;
+namespace LizardsAndPumpkins\DataPool\KeyValue\File;
 
-use Brera\DataPool\KeyValue\KeyValueStore;
-use Brera\DataPool\KeyValue\KeyNotFoundException;
-use Brera\DataPool\KeyValue\KeyValueStoreNotAvailableException;
+use LizardsAndPumpkins\DataPool\KeyValue\KeyValueStore;
+use LizardsAndPumpkins\DataPool\KeyValue\KeyNotFoundException;
+use LizardsAndPumpkins\DataPool\KeyValue\KeyValueStoreNotAvailableException;
 
 class FileKeyValueStore implements KeyValueStore
 {
