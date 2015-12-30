@@ -96,7 +96,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      */
     private function getFilePathByKey($key)
     {
-        return $this->storagePath . '/' . $key;
+        return $this->storagePath . '/' . urlencode($key);
     }
 
     public function clear()

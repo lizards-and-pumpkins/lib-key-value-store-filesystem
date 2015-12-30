@@ -94,4 +94,14 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
         $this->store->clear();
         $this->assertFalse($this->store->has($key));
     }
+
+    public function testKeyCanContainSpecialCharacters()
+    {
+        $key = 'foo/bar?baz=qux';
+        $value = 'value';
+
+        $this->store->set($key, $value);
+
+        $this->assertSame($value, $this->store->get($key));
+    }
 }
