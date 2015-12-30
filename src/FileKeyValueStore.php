@@ -68,15 +68,13 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      */
     public function multiGet(array $keys)
     {
-        $items = [];
-
-        foreach ($keys as $key) {
-            if ($this->has($key)) {
-                $items[$key] = $this->get($key);
+        return array_reduce($keys, function(array $carry, $key) {
+            if (!$this->has($key)) {
+                return $carry;
             }
-        }
 
-        return $items;
+            return array_merge($carry, [$key => $this->get($key)]);
+        }, []);
     }
 
     /**
@@ -96,7 +94,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      */
     private function getFilePathByKey($key)
     {
-        return $this->storagePath . '/' . $key;
+        return $this->storagePath . '/' . urlencode($key);
     }
 
     public function clear()
