@@ -38,7 +38,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     public function testExceptionIsThrownIfStorageDirIsNotWritable()
     {
-        $this->setExpectedException(KeyValueStoreNotAvailableException::class);
+        $this->expectException(KeyValueStoreNotAvailableException::class);
         new FileKeyValueStore('foo');
     }
 
@@ -53,7 +53,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     public function testExceptionIsThrownIfValueIsNotSet()
     {
-        $this->setExpectedException(KeyNotFoundException::class);
+        $this->expectException(KeyNotFoundException::class);
         $this->store->get('not set key');
     }
 

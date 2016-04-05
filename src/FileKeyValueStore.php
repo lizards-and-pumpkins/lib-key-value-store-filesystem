@@ -15,10 +15,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      */
     private $storagePath;
 
-    /**
-     * @param string $storagePath
-     */
-    public function __construct($storagePath)
+    public function __construct(string $storagePath)
     {
         if (!is_writable($storagePath)) {
             throw new KeyValueStoreNotAvailableException(sprintf(
@@ -33,7 +30,6 @@ class FileKeyValueStore implements KeyValueStore, Clearable
     /**
      * @param string $key
      * @param mixed $value
-     * @return void
      */
     public function set($key, $value)
     {
@@ -57,7 +53,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      * @param string $key
      * @return bool
      */
-    public function has($key)
+    public function has($key) : bool
     {
         return is_readable($this->getFilePathByKey($key));
     }
@@ -66,7 +62,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      * @param string[] $keys
      * @return mixed[]
      */
-    public function multiGet(array $keys)
+    public function multiGet(array $keys) : array 
     {
         return array_reduce($keys, function(array $carry, $key) {
             if (!$this->has($key)) {
@@ -79,7 +75,6 @@ class FileKeyValueStore implements KeyValueStore, Clearable
 
     /**
      * @param string[] $items
-     * @return null
      */
     public function multiSet(array $items)
     {
@@ -92,7 +87,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      * @param string $key
      * @return string
      */
-    private function getFilePathByKey($key)
+    private function getFilePathByKey($key) : string 
     {
         return $this->storagePath . '/' . urlencode($key);
     }
