@@ -1,5 +1,5 @@
 {
-    "name": "lizards-and-pumpkins/lib-key-value-store",
+    "name": "lizards-and-pumpkins/lib-key-value-store-filesystem",
     "description": "Lizards & Pumpkins Filesystem KeyValueStore Library",
     "license": "BSD-3-Clause",
     "authors": [
