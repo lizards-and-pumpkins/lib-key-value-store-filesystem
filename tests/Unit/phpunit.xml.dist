@@ -19,11 +19,10 @@
         timeoutForSmallTests="1"
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
-        checkForUnintentionallyCoveredCode="true"
         beStrictAboutTestsThatDoNotTestAnything="true"
         beStrictAboutOutputDuringTests="true"
         verbose="false">
-    <testsuite name="Lizards and Pumpkins KeyValueStore Library Unit Tests">
+    <testsuite name="Lizards and Pumpkins Filesystem KeyValueStore Library Unit Tests">
         <directory>Suites</directory>
     </testsuite>
     <filter>

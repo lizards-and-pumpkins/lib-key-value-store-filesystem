@@ -1,12 +1,12 @@
 <?php
 
-namespace LizardsAndPumpkins\DataPool\KeyValue\File;
+namespace LizardsAndPumpkins\DataPool\KeyValueStore\File;
 
-use LizardsAndPumpkins\DataPool\KeyValue\KeyValueStore;
-use LizardsAndPumpkins\DataPool\KeyValue\Exception\KeyNotFoundException;
-use LizardsAndPumpkins\DataPool\KeyValue\Exception\KeyValueStoreNotAvailableException;
-use LizardsAndPumpkins\Utils\Clearable;
-use LizardsAndPumpkins\Utils\LocalFilesystem;
+use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
+use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyValueStoreNotAvailableException;
+use LizardsAndPumpkins\DataPool\KeyValueStore\KeyValueStore;
+use LizardsAndPumpkins\Util\FileSystem\LocalFilesystem;
+use LizardsAndPumpkins\Util\Storage\Clearable;
 
 class FileKeyValueStore implements KeyValueStore, Clearable
 {

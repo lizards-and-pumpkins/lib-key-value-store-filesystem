@@ -1,13 +1,13 @@
 <?php
 
-namespace LizardsAndPumpkins\DataPool\KeyValue\File;
+namespace LizardsAndPumpkins\DataPool\KeyValueStore\File;
 
-use LizardsAndPumpkins\DataPool\KeyValue\Exception\KeyNotFoundException;
-use LizardsAndPumpkins\DataPool\KeyValue\Exception\KeyValueStoreNotAvailableException;
-use LizardsAndPumpkins\Utils\Clearable;
+use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
+use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyValueStoreNotAvailableException;
+use LizardsAndPumpkins\Util\Storage\Clearable;
 
 /**
- * @covers \LizardsAndPumpkins\DataPool\KeyValue\File\FileKeyValueStore
+ * @covers \LizardsAndPumpkins\DataPool\KeyValueStore\File\FileKeyValueStore
  */
 class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 {
