@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LizardsAndPumpkins\DataPool\KeyValueStore\File;
 
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
@@ -31,7 +33,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      * @param string $key
      * @param mixed $value
      */
-    public function set($key, $value)
+    public function set(string $key, $value)
     {
         file_put_contents($this->getFilePathByKey($key), $value, LOCK_EX);
     }
@@ -40,7 +42,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      * @param string $key
      * @return mixed
      */
-    public function get($key)
+    public function get(string $key)
     {
         if (!$this->has($key)) {
             throw new KeyNotFoundException(sprintf('Key not found "%s"', $key));
@@ -49,11 +51,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
         return file_get_contents($this->getFilePathByKey($key));
     }
 
-    /**
-     * @param string $key
-     * @return bool
-     */
-    public function has($key) : bool
+    public function has(string $key) : bool
     {
         return is_readable($this->getFilePathByKey($key));
     }
@@ -62,9 +60,9 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      * @param string[] $keys
      * @return mixed[]
      */
-    public function multiGet(array $keys) : array 
+    public function multiGet(string ...$keys) : array
     {
-        return array_reduce($keys, function(array $carry, $key) {
+        return array_reduce($keys, function (array $carry, $key) {
             if (!$this->has($key)) {
                 return $carry;
             }
@@ -74,7 +72,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
     }
 
     /**
-     * @param string[] $items
+     * @param mixed[] $items
      */
     public function multiSet(array $items)
     {
@@ -83,11 +81,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
         }
     }
 
-    /**
-     * @param string $key
-     * @return string
-     */
-    private function getFilePathByKey($key) : string 
+    private function getFilePathByKey(string $key) : string
     {
         return $this->storagePath . '/' . urlencode($key);
     }
