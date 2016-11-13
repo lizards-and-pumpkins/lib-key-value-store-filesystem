@@ -6,6 +6,7 @@ namespace LizardsAndPumpkins\DataPool\KeyValueStore\File;
 
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyValueStoreNotAvailableException;
+use LizardsAndPumpkins\DataPool\KeyValueStore\File\Exception\SnippetCanNotBeStoredException;
 use LizardsAndPumpkins\DataPool\KeyValueStore\KeyValueStore;
 use LizardsAndPumpkins\Util\FileSystem\LocalFilesystem;
 use LizardsAndPumpkins\Util\Storage\Clearable;
@@ -35,7 +36,11 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      */
     public function set(string $key, $value)
     {
-        file_put_contents($this->getFilePathByKey($key), $value, LOCK_EX);
+        if (false === file_put_contents($this->getFilePathByKey($key), $value, LOCK_EX)) {
+            throw new SnippetCanNotBeStoredException(
+                sprintf('Snippet "%s" can not be stored. Permissions? Disk is full?', $key)
+            );
+        }
     }
 
     /**

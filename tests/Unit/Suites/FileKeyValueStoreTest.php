@@ -6,6 +6,7 @@ namespace LizardsAndPumpkins\DataPool\KeyValueStore\File;
 
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyValueStoreNotAvailableException;
+use LizardsAndPumpkins\DataPool\KeyValueStore\File\Exception\SnippetCanNotBeStoredException;
 use LizardsAndPumpkins\Util\Storage\Clearable;
 
 /**
@@ -22,6 +23,16 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
      * @var string
      */
     private $storageDir;
+
+    /**
+     * @var bool
+     */
+    private static $diskIsFull = false;
+
+    public static function isDiskFull() : bool
+    {
+        return self::$diskIsFull;
+    }
 
     protected function setUp()
     {
@@ -106,4 +117,27 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($value, $this->store->get($key));
     }
+
+    public function testExceptionIsThrownIfSnippetCouldNotBeWritten()
+    {
+        self::$diskIsFull = true;
+        $this->expectException(SnippetCanNotBeStoredException::class);
+        $this->store->set('foo', 'bar');
+    }
+}
+
+/**
+ * @param string $filename
+ * @param mixed $data
+ * @param int|null $flags
+ * @param resource|null $context
+ * @return int|bool
+ */
+function file_put_contents(string $filename, $data, int $flags = null, $context = null)
+{
+    if (FileKeyValueStoreTest::isDiskFull()) {
+        return false;
+    }
+
+    return \file_put_contents($filename, $data, $flags, $context);
 }
