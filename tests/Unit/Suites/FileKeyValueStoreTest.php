@@ -27,7 +27,7 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
     /**
      * @var bool
      */
-    private static $diskIsFull = false;
+    private static $diskIsFull;
 
     public static function isDiskFull() : bool
     {
@@ -36,8 +36,9 @@ class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->storageDir = sys_get_temp_dir() . '/lizards-and-pumpkins-lib-key-value-store';
+        self::$diskIsFull = false;
 
+        $this->storageDir = sys_get_temp_dir() . '/lizards-and-pumpkins-lib-key-value-store';
         mkdir($this->storageDir);
 
         $this->store = new FileKeyValueStore($this->storageDir);
