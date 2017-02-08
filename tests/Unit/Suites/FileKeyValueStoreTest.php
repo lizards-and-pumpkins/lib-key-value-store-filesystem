@@ -8,11 +8,12 @@ use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyValueStoreNotAvailableException;
 use LizardsAndPumpkins\DataPool\KeyValueStore\File\Exception\SnippetCanNotBeStoredException;
 use LizardsAndPumpkins\Util\Storage\Clearable;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LizardsAndPumpkins\DataPool\KeyValueStore\File\FileKeyValueStore
  */
-class FileKeyValueStoreTest extends \PHPUnit_Framework_TestCase
+class FileKeyValueStoreTest extends TestCase
 {
     /**
      * @var FileKeyValueStore
