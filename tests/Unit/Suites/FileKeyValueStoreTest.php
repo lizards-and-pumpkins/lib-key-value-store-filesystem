@@ -7,7 +7,6 @@ namespace LizardsAndPumpkins\DataPool\KeyValueStore\File;
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyNotFoundException;
 use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyValueStoreNotAvailableException;
 use LizardsAndPumpkins\DataPool\KeyValueStore\File\Exception\SnippetCanNotBeStoredException;
-use LizardsAndPumpkins\Util\Storage\Clearable;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -30,12 +29,12 @@ class FileKeyValueStoreTest extends TestCase
      */
     private static $diskIsFull;
 
-    public static function isDiskFull() : bool
+    public static function isDiskFull(): bool
     {
         return self::$diskIsFull;
     }
 
-    protected function setUp()
+    final protected function setUp(): void
     {
         self::$diskIsFull = false;
 
@@ -45,19 +44,19 @@ class FileKeyValueStoreTest extends TestCase
         $this->store = new FileKeyValueStore($this->storageDir);
     }
 
-    protected function tearDown()
+    final protected function tearDown(): void
     {
         array_map('unlink', glob($this->storageDir . '/*'));
         rmdir($this->storageDir);
     }
 
-    public function testExceptionIsThrownIfStorageDirIsNotWritable()
+    public function testExceptionIsThrownIfStorageDirIsNotWritable(): void
     {
         $this->expectException(KeyValueStoreNotAvailableException::class);
         new FileKeyValueStore('foo');
     }
 
-    public function testValueIsSetAndRetrieved()
+    public function testValueIsSetAndRetrieved(): void
     {
         $key = 'key';
         $value = 'value';
@@ -66,13 +65,13 @@ class FileKeyValueStoreTest extends TestCase
         $this->assertEquals($value, $this->store->get($key));
     }
 
-    public function testExceptionIsThrownIfValueIsNotSet()
+    public function testExceptionIsThrownIfValueIsNotSet(): void
     {
         $this->expectException(KeyNotFoundException::class);
         $this->store->get('not set key');
     }
 
-    public function testTrueIsReturnedOnlyAfterValueIsSet()
+    public function testTrueIsReturnedOnlyAfterValueIsSet(): void
     {
         $key = 'key';
         $value = 'value';
@@ -83,7 +82,7 @@ class FileKeyValueStoreTest extends TestCase
         $this->assertTrue($this->store->has($key));
     }
 
-    public function testMultipleKeysAreSetAndRetrieved()
+    public function testMultipleKeysAreSetAndRetrieved(): void
     {
         $keys = ['key1', 'key2'];
         $values = ['foo', 'bar'];
@@ -95,22 +94,17 @@ class FileKeyValueStoreTest extends TestCase
         $this->assertSame($items, $result);
     }
 
-    public function testClearableInterfaceIsImplemented()
-    {
-        $this->assertInstanceOf(Clearable::class, $this->store);
-    }
-
-    public function testStorageContentsIsFlushed()
+    public function testStorageContentsIsFlushed(): void
     {
         $key = 'key';
         $value = 'value';
-        
+
         $this->store->set($key, $value);
         $this->store->clear();
         $this->assertFalse($this->store->has($key));
     }
 
-    public function testKeyCanContainSpecialCharacters()
+    public function testKeyCanContainSpecialCharacters(): void
     {
         $key = 'foo/bar?baz=qux';
         $value = 'value';
@@ -120,7 +114,7 @@ class FileKeyValueStoreTest extends TestCase
         $this->assertSame($value, $this->store->get($key));
     }
 
-    public function testExceptionIsThrownIfSnippetCouldNotBeWritten()
+    public function testExceptionIsThrownIfSnippetCouldNotBeWritten(): void
     {
         self::$diskIsFull = true;
         $this->expectException(SnippetCanNotBeStoredException::class);

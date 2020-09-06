@@ -9,9 +9,8 @@ use LizardsAndPumpkins\DataPool\KeyValueStore\Exception\KeyValueStoreNotAvailabl
 use LizardsAndPumpkins\DataPool\KeyValueStore\File\Exception\SnippetCanNotBeStoredException;
 use LizardsAndPumpkins\DataPool\KeyValueStore\KeyValueStore;
 use LizardsAndPumpkins\Util\FileSystem\LocalFilesystem;
-use LizardsAndPumpkins\Util\Storage\Clearable;
 
-class FileKeyValueStore implements KeyValueStore, Clearable
+class FileKeyValueStore implements KeyValueStore
 {
     /**
      * @var string
@@ -20,7 +19,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
 
     public function __construct(string $storagePath)
     {
-        if (!is_writable($storagePath)) {
+        if (! is_writable($storagePath)) {
             throw new KeyValueStoreNotAvailableException(sprintf(
                 'Directory "%s" is not writable by the filesystem key-value storage',
                 $storagePath
@@ -34,7 +33,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      * @param string $key
      * @param mixed $value
      */
-    public function set(string $key, $value)
+    public function set(string $key, $value): void
     {
         if (false === file_put_contents($this->getFilePathByKey($key), $value, LOCK_EX)) {
             throw new SnippetCanNotBeStoredException(
@@ -49,14 +48,14 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      */
     public function get(string $key)
     {
-        if (!$this->has($key)) {
+        if (! $this->has($key)) {
             throw new KeyNotFoundException(sprintf('Key not found "%s"', $key));
         }
 
         return file_get_contents($this->getFilePathByKey($key));
     }
 
-    public function has(string $key) : bool
+    public function has(string $key): bool
     {
         return is_readable($this->getFilePathByKey($key));
     }
@@ -65,10 +64,10 @@ class FileKeyValueStore implements KeyValueStore, Clearable
      * @param string[] $keys
      * @return mixed[]
      */
-    public function multiGet(string ...$keys) : array
+    public function multiGet(string ...$keys): array
     {
         return array_reduce($keys, function (array $carry, $key) {
-            if (!$this->has($key)) {
+            if (! $this->has($key)) {
                 return $carry;
             }
 
@@ -86,7 +85,7 @@ class FileKeyValueStore implements KeyValueStore, Clearable
         }
     }
 
-    private function getFilePathByKey(string $key) : string
+    private function getFilePathByKey(string $key): string
     {
         return $this->storagePath . '/' . urlencode($key);
     }
